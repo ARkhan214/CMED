@@ -1,0 +1,76 @@
+<div class="container mt-4">
+  <div class="card shadow-sm p-3">
+    <h4 class="text-center mb-3">Medicine List</h4>
+
+    <!-- Search Section -->
+    <div class="d-flex align-items-center gap-2 mb-3 flex-wrap justify-content-center">
+      <input type="number" [(ngModel)]="searchId" placeholder="Enter Medicine ID"
+             class="form-control" style="width: 200px;">
+      <button (click)="searchById()" class="btn btn-primary">Search</button>
+      <button (click)="loadMedicines()" class="btn btn-secondary">Reset</button>
+    </div>
+
+
+    <!-- 🩺 Add Medicine Form -->
+    <div *ngIf="showAddForm" class="card p-3 mb-3 fade-in">
+  <h5 class="mb-3 text-center text-success">Add New Medicine</h5>
+
+  <div class="form-row d-flex justify-content-between align-items-end">
+    <div class="form-group flex-fill me-3">
+      <label class="form-label">Medicine Name</label>
+      <input type="text" [(ngModel)]="newMedicine.medicineName" class="form-control" placeholder="Enter name">
+    </div>
+
+    <div class="form-group flex-fill me-3">
+      <label class="form-label">Dosage</label>
+      <input type="text" [(ngModel)]="newMedicine.dosage" class="form-control" placeholder="e.g. 500mg">
+    </div>
+
+    <div class="form-group">
+      <button (click)="addMedicine()" class="btn btn-success">Save</button>
+    </div>
+  </div>
+</div>
+
+
+
+    <!--  Loading Indicator -->
+    <div *ngIf="isLoading" class="text-center text-info mb-3">
+      <div class="spinner-border" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+    </div>
+
+    <!--  Error Message -->
+    <div *ngIf="errorMessage" class="alert alert-danger text-center p-2">
+      {{ errorMessage }}
+    </div>
+
+    <!-- 📋 Table -->
+    <table class="table table-striped table-bordered align-middle text-center" *ngIf="!isLoading && medicines.length > 0">
+      <thead class="table-dark">
+        <tr>
+          <th>ID</th>
+          <th>Medicine Name</th>
+          <th>Dosage</th>
+          <th>Frequency</th>
+          <th>Duration (Days)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let med of medicines">
+          <td>{{ med.id }}</td>
+          <td>{{ med.medicineName }}</td>
+          <td>{{ med.dosage }}</td>
+          <td>{{ med.frequency }}</td>
+          <td>{{ med.duration }}</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- If No Result -->
+    <div *ngIf="!isLoading && medicines.length === 0 && !errorMessage" class="text-center text-muted">
+      No medicines found.
+    </div>
+  </div>
+</div>

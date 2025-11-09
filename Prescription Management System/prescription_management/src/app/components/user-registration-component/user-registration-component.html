@@ -1,0 +1,76 @@
+<div class="register-container">
+  <h2>👤 User Registration</h2>
+
+  <form (ngSubmit)="register()" #registerForm="ngForm">
+    <div class="form-group mb-3">
+      <label for="username">Username *</label>
+      <input type="text" id="username" name="username" class="form-control" [(ngModel)]="user.username" required
+        placeholder="Enter username" />
+    </div>
+
+    <div class="form-group mb-3">
+      <label for="password">Password *</label>
+      <input type="password" id="password" name="password" class="form-control" [(ngModel)]="user.password" required
+        placeholder="Enter password" />
+    </div>
+
+    <div class="form-group mb-3">
+      <label for="email">Email *</label>
+      <input type="email" id="email" name="email" class="form-control" [(ngModel)]="user.email" required
+        placeholder="Enter a valid email" />
+    </div>
+
+    <div class="form-group mb-3">
+      <label for="phone">Phone</label>
+      <input type="text" id="phone" name="phone" class="form-control" [(ngModel)]="user.phone"
+        placeholder="Enter phone" />
+    </div>
+
+    <div class="form-group mb-3">
+      <label for="gender">Gender</label>
+      <select id="gender" name="gender" class="form-control" [(ngModel)]="user.gender" required="">
+        <option value="" disabled>Select Gender</option>
+        <option value="Male">Male</option>
+        <option value="Female">Female</option>
+        <option value="Other">Other</option>
+      </select>
+    </div>
+
+    <div class="form-group mb-3">
+      <label for="status">Status</label>
+      <select id="status" name="status" class="form-control" [(ngModel)]="user.status">
+        <option *ngFor="let s of statusOptions" [value]="s">{{ s }}</option>
+      </select>
+    </div>
+
+    <div class="form-group mb-3">
+      <label for="study">Study</label>
+      <input type="text" id="study" name="study" class="form-control" [(ngModel)]="user.study"
+        placeholder="Enter study" />
+    </div>
+
+    <div class="form-group mb-3">
+      <label for="chamber">Chamber</label>
+      <input type="text" id="chamber" name="chamber" class="form-control" [(ngModel)]="user.chamber"
+        placeholder="Enter chamber" />
+    </div>
+
+    <div class="text-center">
+      <button type="submit" class="btn btn-success" [disabled]="loading">
+        {{ loading ? 'Registering...' : 'Register' }}
+      </button>
+    </div>
+
+
+    <!-- <div class="container text-center">
+      <button type="submit" class="btn btn-primary mt-3">
+        Register
+      </button>
+    </div> -->
+
+  </form>
+
+  <div *ngIf="message" class="mt-3 text-center" [ngClass]="{ 'text-danger': isError, 'text-success': !isError }">
+    {{ message }}
+  </div>
+</div>

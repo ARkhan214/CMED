@@ -1,0 +1,69 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm px-4 py-3">
+  <a class="navbar-brand fw-bold text-light fs-3" routerLink="/">🩺 Prescription App</a>
+
+  <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+    <ul class="navbar-nav align-items-center gap-2">
+      <!-- 🔒 Not Logged In -->
+      <ng-container *ngIf="!isLoggedIn">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/login">🔐 Login</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/registeration">Registration</a>
+        </li>
+      </ng-container>
+
+      <ng-container *ngIf="isLoggedIn && userRole === 'USER'">
+
+        <!-- Prescription Dropdown -->
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="prescriptionDropdown" role="button" data-bs-toggle="dropdown"
+            aria-expanded="false">
+            📜 Prescription
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="prescriptionDropdown">
+            <li><a class="dropdown-item" routerLink="/createprescriptions">New Prescription</a></li>
+            <li><a class="dropdown-item" routerLink="/prescriptionreport">Prescription Reports</a></li>
+            <li><a class="dropdown-item" routerLink="/prescriptions">View Prescriptions</a></li>
+          </ul>
+        </li>
+
+        <!-- Medicine Dropdown -->
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="medicineDropdown" role="button" data-bs-toggle="dropdown"
+            aria-expanded="false">
+            💊 Medicine
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="medicineDropdown">
+            <li><a class="dropdown-item" routerLink="/medicines">Medicines</a></li>
+          </ul>
+        </li>
+
+        <!-- Profile Dropdown -->
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="profileDropdown" role="button" data-bs-toggle="dropdown"
+            aria-expanded="false">
+            👥 Profile
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="profileDropdown">
+            <li><a class="dropdown-item" routerLink="/viewallusers">All Users</a></li>
+            <li><a class="dropdown-item" routerLink="/registeration">Registration</a></li>
+            <li><a class="dropdown-item" routerLink="/users">User Profile</a></li>
+          </ul>
+        </li>
+
+        <!-- Login / Logout Dropdown -->
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="authDropdown" role="button" data-bs-toggle="dropdown"
+            aria-expanded="false">
+            🔐 Logout
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="authDropdown">
+            <li><button class="btn btn-outline-primary btn-sm ms-2 mt-2 " (click)="logout()">Logout</button></li>
+          </ul>
+        </li>
+
+      </ng-container>
+    </ul>
+  </div>
+</nav>

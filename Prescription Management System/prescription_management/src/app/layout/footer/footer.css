@@ -1,0 +1,16 @@
+.footer {
+  position: relative;
+  bottom: 0;
+  width: 100%;
+  font-size: 0.9rem;
+}
+
+.footer .social-links a {
+  font-size: 1.3rem;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.footer .social-links a:hover {
+  color: #0d6efd;
+  transform: translateY(-3px);
+}

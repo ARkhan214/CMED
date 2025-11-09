@@ -1,0 +1,126 @@
+<div class="container mt-4">
+  <h2>All Users</h2>
+
+  <!-- Loading state -->
+  <div *ngIf="loading" class="text-center">Loading users...</div>
+
+  <!-- Message -->
+  <div *ngIf="message" class="mt-2 text-center" 
+       [ngClass]="{ 'text-danger': isError, 'text-success': !isError }">
+    {{ message }}
+  </div>
+
+  <!-- Users Table -->
+  <table *ngIf="users.length && !selectedUser" class="table table-bordered mt-3">
+    <thead class="table-success">
+      <tr>
+        <th>ID</th>
+        <th>Username</th>
+        <th>Email</th>
+        <th>Status</th>
+        <th>Role</th>
+        <th>Phone</th>
+        <th>Gender</th>
+        <th>Study</th>
+        <th>Chamber</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of users">
+        <td>{{ user.id }}</td>
+        <td>{{ user.username }}</td>
+        <td>{{ user.email }}</td>
+        <td>{{ user.status }}</td>
+        <td>{{ user.role }}</td>
+        <td>{{ user.phone }}</td>
+        <td>{{ user.gender }}</td>
+        <td>{{ user.study }}</td>
+        <td>{{ user.chamber }}</td>
+        <td>
+          <button class="btn btn-primary btn-sm me-2" (click)="editUser(user)">Edit</button>
+          <button class="btn btn-danger btn-sm" (click)="deleteUser(user)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- No users -->
+  <div *ngIf="!users.length && !loading" class="text-center mt-3">
+    No users found.
+  </div>
+
+  <!-- Edit Form -->
+  <div *ngIf="selectedUser" class="mt-4 p-3 border rounded bg-light">
+    <h4>Edit User: {{ selectedUser.username }}</h4>
+
+    <form (ngSubmit)="saveUser()">
+
+      <!-- Username & Email -->
+      <div class="row mb-2">
+        <div class="col">
+          <label>Username *</label>
+          <input [(ngModel)]="selectedUser.username" name="username" class="form-control" required />
+        </div>
+        <div class="col">
+          <label>Email *</label>
+          <input [(ngModel)]="selectedUser.email" name="email" type="email" class="form-control" required />
+        </div>
+      </div>
+
+      <!-- Password -->
+      <div class="row mb-2">
+        <div class="col">
+          <label>Password (optional)</label>
+          <input [(ngModel)]="selectedUser.password" name="password" type="password" class="form-control" />
+        </div>
+      </div>
+      
+
+      <!-- Status & Role -->
+      <div class="row mb-2">
+        <div class="col">
+          <label>Status</label>
+          <select [(ngModel)]="selectedUser.status" name="status" class="form-control">
+            <option *ngFor="let s of statusOptions" [value]="s">{{ s }}</option>
+          </select>
+        </div>
+        <div class="col">
+          <label>Role</label>
+          <input [(ngModel)]="selectedUser.role" name="role" class="form-control"/>
+        </div>
+      </div>
+
+      <!-- Phone & Gender -->
+      <div class="row mb-2">
+        <div class="col">
+          <label>Phone</label>
+          <input [(ngModel)]="selectedUser.phone" name="phone" class="form-control"/>
+        </div>
+        <div class="col">
+          <label>Gender</label>
+          <input [(ngModel)]="selectedUser.gender" name="gender" class="form-control"/>
+        </div>
+      </div>
+
+      <!-- Study & Chamber -->
+      <div class="row mb-2">
+        <div class="col">
+          <label>Study</label>
+          <input [(ngModel)]="selectedUser.study" name="study" class="form-control"/>
+        </div>
+        <div class="col">
+          <label>Chamber</label>
+          <input [(ngModel)]="selectedUser.chamber" name="chamber" class="form-control"/>
+        </div>
+      </div>
+
+      <!-- Buttons -->
+      <div class="text-center mt-3">
+        <button type="submit" class="btn btn-success me-2">Update</button>
+        <button type="button" class="btn btn-secondary" (click)="cancelEdit()">Cancel</button>
+      </div>
+
+    </form>
+  </div>
+</div>

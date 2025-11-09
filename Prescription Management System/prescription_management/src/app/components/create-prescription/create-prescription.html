@@ -1,0 +1,73 @@
+<div class="container mt-3">
+    <h2>Create Prescription</h2>
+
+    <!-- <div *ngIf="message" [ngClass]="{'text-success': !isError, 'text-danger': isError}">
+        {{ message }}
+    </div> -->
+
+    <form (ngSubmit)="savePrescription()">
+
+        <div class="form-group">
+            <label>Patient Name</label>
+            <input type="text" class="form-control" [(ngModel)]="prescription.patientName" name="patientName" required>
+        </div>
+
+        <div class="form-group">
+            <label>Patient Age</label>
+            <input type="number" class="form-control" [(ngModel)]="prescription.patientAge" name="patientAge" min="0"
+                max="120" required />
+        </div>
+
+        <div class="form-group">
+            <label>Patient Gender</label>
+            <select class="form-control" [(ngModel)]="prescription.patientGender" name="patientGender" required>
+                <option value="" disabled>Select Gender</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Other">Other</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>Diagnosis</label>
+            <input type="text" class="form-control" [(ngModel)]="prescription.diagnosis" name="diagnosis">
+        </div>
+
+        <div class="form-group">
+            <label>Prescription Date</label>
+            <input type="date" class="form-control" [(ngModel)]="prescription.prescriptionDate" name="prescriptionDate">
+        </div>
+
+        <div class="form-group">
+            <label>Next Visit Date</label>
+            <input type="date" class="form-control" [(ngModel)]="prescription.nextVisitDate" name="nextVisitDate">
+        </div>
+
+        <h4>Medicines</h4>
+        <div *ngFor="let med of prescription.medicines; let i = index" class="border p-2 mb-2">
+            <div class="form-group">
+                <label>Medicine Name</label>
+                <input type="text" class="form-control" [(ngModel)]="med.medicineName" name="medicineName{{i}}"
+                    required>
+            </div>
+            <div class="form-group">
+                <label>Dosage</label>
+                <input type="text" class="form-control" [(ngModel)]="med.dosage" name="dosage{{i}}">
+            </div>
+            <div class="form-group">
+                <label>Frequency</label>
+                <input type="text" class="form-control" [(ngModel)]="med.frequency" name="frequency{{i}}">
+            </div>
+            <div class="form-group">
+                <label>Duration (days)</label>
+                <input type="number" class="form-control" [(ngModel)]="med.duration" name="duration{{i}}">
+            </div>
+            <button type="button" class="btn btn-danger btn-sm mt-2" (click)="removeMedicine(i)">Remove
+                Medicine</button>
+        </div>
+
+        <button type="button" class="btn btn-secondary mb-3" (click)="addMedicine()">Add Medicine</button>
+        <br>
+        <button type="submit" class="btn btn-primary">Save Prescription</button>
+    </form>
+</div>

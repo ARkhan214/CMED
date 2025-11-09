@@ -1,0 +1,27 @@
+<div *ngIf="user; else notLoggedIn" class="user-profile-container">
+  <h2>👤 {{ user.username }}</h2>
+
+  <ul class="list-group mt-3">
+    <li class="list-group-item"><strong>Role:</strong> {{ user.role }}</li>
+    <li class="list-group-item"><strong>Email:</strong> {{ user.email }}</li>
+    <li class="list-group-item" *ngIf="user.phone"><strong>Phone:</strong> {{ user.phone }}</li>
+    <li class="list-group-item" *ngIf="user.gender"><strong>Gender:</strong> {{ user.gender }}</li>
+    <li class="list-group-item" *ngIf="user.status"><strong>Status:</strong> {{ user.status }}</li>
+    <li class="list-group-item" *ngIf="user.study"><strong>Study:</strong> {{ user.study }}</li>
+    <li class="list-group-item" *ngIf="user.chamber"><strong>Chamber:</strong> {{ user.chamber }}</li>
+  </ul>
+
+  <div class="mt-3 text-center">
+    <button class="btn btn-danger" (click)="logout()">
+      Logout
+    </button>
+  </div>
+</div>
+
+<ng-template #notLoggedIn>
+  <p [ngClass]="{'text-danger': isError}">{{ message }}</p>
+</ng-template>
+
+<div *ngIf="message && !user" class="mt-2 text-center" [ngClass]="{'text-danger': isError, 'text-success': !isError}">
+  {{ message }}
+</div>

@@ -1,0 +1,144 @@
+<div class="container mt-4">
+  <!-- Prescription List -->
+  <div class="card mb-4 p-3">
+    <h4 style="text-align: center;">All Prescriptions</h4>
+
+    <!-- Info marquee -->
+    <marquee behavior="scroll" direction="left" class="info-marquee">
+      To see the whole list of prescriptions, click "View All" button.
+      The prescriptions of the current month will be shown by default.
+    </marquee>
+
+
+    <div class="mt-3 mb-3">
+      <div class="d-flex align-items-center gap-3 flex-wrap">
+        <button (click)="loadPrescriptionsAll()" class="btn btn-info me-3">View All</button>
+        <!-- <button (click)="loadPrescriptions()" class="btn btn-secondary">Last Month</button> -->
+        <div>
+          <label>From: </label>
+          <input type="date" [(ngModel)]="fromDate" class="form-control d-inline-block" style="width: 180px;">
+        </div>
+
+        <div>
+          <label>To: </label>
+          <input type="date" [(ngModel)]="toDate" class="form-control d-inline-block" style="width: 180px;">
+        </div>
+
+        <button (click)="filterByDateRange()" class="btn btn-success me-3">Filter</button>
+
+        <button (click)="loadPrescriptions()" class="btn btn-secondary">Refresh</button>
+
+      </div>
+    </div>
+
+    <table class="table table-bordered table-striped">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Patient</th>
+          <th>Age</th>
+          <th>Gender</th>
+          <th>Diagnosis</th>
+          <th>Prescription Date</th>
+          <th>Next Visit</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let pres of prescriptions">
+          <td>{{ pres.id }}</td>
+          <td>{{ pres.patientName }}</td>
+          <td>{{ pres.patientAge }}</td>
+          <td>{{ pres.patientGender }}</td>
+          <td>{{ pres.diagnosis }}</td>
+          <td>{{ pres.prescriptionDate | date:'yyyy-MM-dd' }}</td>
+          <td>{{ pres.nextVisitDate | date:'yyyy-MM-dd' }}</td>
+          <td>
+            <button class="btn btn-primary btn-sm me-5" (click)="selectPrescription(pres)">Edit</button>
+            <button class="btn btn-danger btn-sm me-5" (click)="deletePrescription(pres.id!)">Delete</button>
+            <button class="btn btn-info btn-sm" (click)="viewPrescription(pres)">View Full Prescription</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+  </div>
+
+  <!-- Edit Selected Prescription -->
+  <div *ngIf="selectedPrescription" class="card mb-4 p-3">
+    <h4>Edit Prescription (ID: {{ selectedPrescription.id }})</h4>
+    <form (ngSubmit)="updatePrescription()" #editForm="ngForm">
+      <div class="row">
+        <div class="col-md-4 mb-2">
+          <label>Patient Name</label>
+          <input type="text" [(ngModel)]="selectedPrescription.patientName" name="editPatientName" class="form-control"
+            required>
+        </div>
+        <div class="col-md-2 mb-2">
+          <label>Age</label>
+          <input type="number" [(ngModel)]="selectedPrescription.patientAge" name="editPatientAge" class="form-control"
+            required>
+        </div>
+        <div class="col-md-2 mb-2">
+          <label>Gender</label>
+          <select [(ngModel)]="selectedPrescription.patientGender" name="editPatientGender" class="form-control"
+            required>
+            <option value="">Select</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+          </select>
+        </div>
+        <div class="col-md-4 mb-2">
+          <label>Prescription Date</label>
+          <input type="date" [(ngModel)]="selectedPrescription.prescriptionDate" name="editPrescriptionDate"
+            class="form-control" required>
+        </div>
+      </div>
+
+      <div class="row mt-2">
+        <div class="col-md-6 mb-2">
+          <label>Diagnosis</label>
+          <input type="text" [(ngModel)]="selectedPrescription.diagnosis" name="editDiagnosis" class="form-control"
+            required>
+        </div>
+        <div class="col-md-6 mb-2">
+          <label>Next Visit Date</label>
+          <input type="date" [(ngModel)]="selectedPrescription.nextVisitDate" name="editNextVisitDate"
+            class="form-control">
+        </div>
+      </div>
+
+      <!-- Medicines -->
+      <div class="mt-3">
+        <h5>Medicines</h5>
+        <div *ngFor="let med of selectedPrescription.medicines; let i = index" class="mb-2 row">
+          <div class="col-md-3">
+            <input type="text" [(ngModel)]="med.medicineName" name="medicineName{{i}}" class="form-control"
+              placeholder="Medicine Name">
+          </div>
+          <div class="col-md-2">
+            <input type="text" [(ngModel)]="med.dosage" name="dosage{{i}}" class="form-control" placeholder="Dosage">
+          </div>
+          <div class="col-md-3">
+            <input type="text" [(ngModel)]="med.frequency" name="frequency{{i}}" class="form-control"
+              placeholder="Frequency">
+          </div>
+          <div class="col-md-2">
+            <input type="number" [(ngModel)]="med.duration" name="duration{{i}}" class="form-control"
+              placeholder="Days">
+          </div>
+          <div class="col-md-2">
+            <button type="button" class="btn btn-danger btn-sm"
+              (click)="removeMedicineFromPrescription(i)">Remove</button>
+          </div>
+        </div>
+        <button type="button" class="btn btn-secondary btn-sm mt-2" (click)="addMedicineToPrescription()">Add
+          Medicine</button>
+      </div>
+
+      <button type="submit" class="btn btn-success mt-3">Update Prescription</button>
+      <button type="button" class="btn btn-secondary mt-3 ms-2"
+        (click)="selectedPrescription = undefined">Cancel</button>
+    </form>
+  </div>
+</div>

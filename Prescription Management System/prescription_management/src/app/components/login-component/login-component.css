@@ -1,0 +1,121 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Montserrat:wght@500;700&display=swap');
+
+/* ==== Global Font ==== */
+body {
+  font-family: 'Poppins', 'Montserrat', sans-serif;
+  background: linear-gradient(135deg, #e0ffe4, #f5fff8);
+  margin: 0;
+  padding: 0;
+}
+
+/* ==== Login Container ==== */
+.login-container {
+  max-width: 1000px;
+  height: 100vh;
+  margin: 60px auto;
+  padding: 40px;
+  border-radius: 15px;
+  background-color: #ffffff;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+
+/* Style for all labels */
+label {
+  font-family: 'Montserrat', 'Poppins', sans-serif; /* beautiful fonts */
+  font-weight: 600; /* bold */
+  font-size: 16px; /* readable size */
+  color: #1b9405; /* greenish color */
+  display: block; /* ensures proper spacing */
+  margin-bottom: 5px; /* gap between label and input */
+  letter-spacing: 0.5px; /* nice letter spacing */
+}
+
+
+label:hover {
+  color: #34b316;
+  transform: scale(1.02);
+  transition: all 0.2s ease;
+}
+
+/* ==== Heading ==== */
+h2 {
+  text-align: center;
+  margin-bottom: 30px;
+  color: #1b9405;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+h2:hover {
+  transform: scale(1.02);
+  transition: all 0.2s ease;
+}
+
+/* ==== Form Group ==== */
+.form-group {
+  margin-bottom: 20px;
+}
+
+/* ==== Input Fields ==== */
+.form-control {
+  height: 55px;
+  font-size: 18px;
+  border: 2px solid #c5e3cb;
+  border-radius: 8px;
+  padding: 10px 15px;
+  transition: all 0.3s ease-in-out;
+  font-family: 'Poppins', sans-serif;
+}
+
+.form-control:focus {
+  border-color: #1b9405;
+  box-shadow: 0 0 8px rgba(27, 148, 5, 0.4);
+  outline: none;
+}
+
+
+
+input:hover {
+  transform: scale(1.02);
+  transition: all 0.2s ease;
+}
+
+/* ==== Button ==== */
+.container {
+  text-align: center;
+}
+
+button {
+  width: 120px;
+  height: 50px;
+  font-size: 18px;
+  font-weight: 600;
+  font-family: 'Montserrat', sans-serif;
+  letter-spacing: 0.5px;
+  border-radius: 8px;
+  background: linear-gradient(90deg, #1b9405, #3ccf1a);
+  border: none;
+  color: white;
+  transition: all 0.3s ease-in-out;
+}
+
+button:hover {
+  background: linear-gradient(90deg, #158004, #34b316);
+  transform: scale(1.05);
+}
+
+/* ==== Success / Error Text ==== */
+.text-success {
+  color: #1b9405;
+  font-weight: 600;
+}
+
+.text-danger {
+  color: #d10e0e;
+  font-weight: 600;
+}
+
